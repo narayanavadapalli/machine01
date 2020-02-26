@@ -1,0 +1,45 @@
+
+6253+9
+<html>
+    <head>
+        <title>{{ name }}'s Website </title>
+    </head>
+
+    <style>
+    table#t01 {
+    width: 100%; 
+    background-color: #5B3256;
+    color: darkblue;
+    border: 200px;
+    padding: 40px;
+    text-align: left;
+}
+th, td {
+  border: 10px solid  #C91F37;
+  background-color:#C3272B;
+  text-align: center;
+  padding: 10px;
+}
+</style>
+    <body>
+        <h1>Here is the Preview of Table {{ user }}	!</h1>
+        <H1>Hello {{ name }}</H1>
+
+<table id="t01">
+	<tr>
+	{% for r in colnames %}
+	<td > {{ r.upper() }}</td>
+	{% endfor %}
+	{% for row in rows %}
+    </tr>
+        <tr>
+        {% for d in row %}
+             <td>{{ d }}</td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+ </table>
+
+
+    </body>
+</html> 
