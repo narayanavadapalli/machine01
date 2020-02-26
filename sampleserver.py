@@ -69,6 +69,16 @@ def hello1(dbname, name):
     return render_template('hello.html', title=dbname, user=dbname,
                            name=name, rows=rows, dbname=dbname, colnames=colnames)
 
+@app.route('/flip')
+def flip():
+    return random.choice(["Head","Tail"])
+
+@app.route('/roll/<n>')
+def roll(n):
+    sum = 0
+    for i in range(1,int(n)+1):
+        sum = sum + random.choice([1,2,3,4,5,6])
+    return str(sum)
 
 @app.route('/download/<path:path>')
 def static_file(path):
