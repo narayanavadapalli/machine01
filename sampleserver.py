@@ -1,32 +1,14 @@
-import psycopg2
-import requests
 from flask import Flask, redirect, render_template, request, url_for, session, make_response, Response, jsonify
-from camera import VideoCamera
-import cv2
+import os, psycopg2, requests, random
+
 
 app = Flask(__name__)
 
-video_stream = VideoCamera()
-
-@app.route('/video')
+@app.route('/index/')
 def index():
     return render_template('index.html')
 
-def gen(camera):
-    while True:
-        frame = camera.get_frame()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-
-@app.route('/video_feed')
-   def video_feed():
-        return Response(gen(video_stream), mimetype='multipart/x-mixed-replace; boundary=frame')
-
 app.secret_key = os.urandom(24)
-
-@app.route('/')
-def index():
-    return "This is / Route"
 
 @app.route('/authorize')
 def authorize():
@@ -35,6 +17,10 @@ def authorize():
 @app.route('/helloworld')
 def helloworld():
     return "Hello World!"
+
+@app.route('/sushi')
+def sushi():
+    return redirect("https://www.bing.com/videos/search?q=extream+kshmr+youtube&view=detail&mid=9ACA9B516D32E71E58669ACA9B516D32E71E5866&FORM=VIRE")
 
 @app.route('/home')
 def home():
@@ -119,4 +105,4 @@ def download_episode(episode):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=666)
+    app.run(debug=False, host='0.0.0.0', port=666)
